@@ -169,6 +169,9 @@ enum {
     ACTION_WPS_LIST_BOOKMARKS,/* optional */
     ACTION_WPS_CREATE_BOOKMARK,/* optional */
     ACTION_WPS_REC,
+    ACTION_WPS_SAY_TIME,
+    ACTION_WPS_SAY_BATTERY_PERCENTAGE,
+
 #if 0
     ACTION_WPSAB_SINGLE, /* This needs to be #defined in
                             the config-<target>.h to one of the ACTION_WPS_ actions

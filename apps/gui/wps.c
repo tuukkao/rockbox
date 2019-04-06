@@ -61,6 +61,10 @@
 #include "playlist_viewer.h"
 #include "wps.h"
 #include "statusbar-skinned.h"
+#include "talk.h"
+#include "time.h"
+#include "powermgmt.h"
+
 
 #define RESTORE_WPS_INSTANTLY       0l
 #define RESTORE_WPS_NEXT_SECOND     ((long)(HZ+current_tick))
@@ -927,6 +931,12 @@ long gui_wps_show(void)
                 gwps_leave_wps();
                 return GO_TO_PLAYLIST_VIEWER;
                 break;
+            case ACTION_WPS_SAY_TIME:
+                say_time();
+                break;
+            case ACTION_WPS_SAY_BATTERY_PERCENTAGE:
+                say_battery_percentage();
+                break;
             default:
                 switch(default_event_handler(button))
                 {   /* music has been stopped by the default handler */
@@ -1020,6 +1030,17 @@ long gui_wps_show(void)
             storage_spin();
     }
     return GO_TO_ROOT; /* unreachable - just to reduce compiler warnings */
+}
+
+void say_time() {
+    struct tm *tm = get_time();
+    if (valid_time(tm)) {
+        talk_time(tm, true);
+    }
+}
+
+void say_battery_percentage() {
+    talk_value(battery_level(), UNIT_PERCENT, true);
 }
 
 /* this is called from the playback thread so NO DRAWING! */

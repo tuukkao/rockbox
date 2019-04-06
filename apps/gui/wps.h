@@ -25,7 +25,11 @@
 #include "screen_access.h"
  
 long gui_wps_show(void);
- 
+
+void say_time();
+
+void say_battery_percentage();
+
 /* wrapper for the wps to load the skin (.wps/.rwps) files */
 void wps_data_load(enum screen_type, const char *, bool);
 
